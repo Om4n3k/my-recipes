@@ -40,9 +40,9 @@ function Page() {
                     {
                         category: 'For Salat',
                         items: [
-                            { count: 1, name: 'tomato' },
+                            { count: 1, unit: null, name: 'tomato' },
                             { count: 200, unit: 'gr', name: 'white cheese' },
-                            { count: 0.5, name: 'onion' }
+                            { count: 0.5, unit: null, name: 'onion' }
                         ]
                     },
                     {
