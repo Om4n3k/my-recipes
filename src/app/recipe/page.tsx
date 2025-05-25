@@ -1,21 +1,19 @@
+import { Button } from '@/components/ui/button'
 import Image from 'next/image'
-import { BiChevronLeft, BiLeftArrow } from 'react-icons/bi'
-import { CgBackspace, CgChevronLeft, CgHeart } from 'react-icons/cg'
-import { FcLeftUp } from 'react-icons/fc'
-import { GrCaretLeftFill } from 'react-icons/gr'
-import { SiLefthook } from 'react-icons/si'
+import { CgChevronLeft, CgHeart, CgTime } from 'react-icons/cg'
+import { HiMiniFire } from 'react-icons/hi2'
 
 function Page() {
     return (
         <div className='p-8 space-y-5'>
             <div className='-m-8 relative h-[300px]'>
                 <div className='bg-transparent p-8 flex justify-between items-center'>
-                    <button className='backdrop-blur-md bg-black/50 text-white aspect-square w-16 rounded-2xl shadow border border-white/50 grid place-items-center text-2xl'>
+                    <Button>
                         <CgChevronLeft />
-                    </button>
-                    <button className='backdrop-blur-md bg-black/50 text-white aspect-square w-16 rounded-2xl shadow border border-white/50 grid place-items-center text-2xl'>
+                    </Button>
+                    <Button className='backdrop-blur-md bg-black/50 text-white aspect-square w-16 rounded-2xl shadow border border-white/50 grid place-items-center text-2xl'>
                         <CgHeart />
-                    </button>
+                    </Button>
                 </div>
                 <Image
                     className='absolute top-0 left-0 -z-10 h-[300px] w-full object-cover rounded-b-[60px]'
@@ -30,8 +28,8 @@ function Page() {
                 <h1 className='font-bold text-3xl'>Greek Salad</h1>
                 <h3 className='font-thin text-neutral-700'>6 ingredients</h3>
                 <div className='flex justify-between items-center text-neutral-700 font-thin mt-4'>
-                    <span>(T) 30min</span>
-                    <span>(F) easy</span>
+                    <span className='inline-flex items-center gap-1.5'><CgTime className='text-xl'/> 30min</span>
+                    <span className='inline-flex items-center gap-1'><HiMiniFire className='text-xl text-rose-600'/><HiMiniFire className='text-xl'/><HiMiniFire className='text-xl'/></span>
                 </div>
             </div>
 
