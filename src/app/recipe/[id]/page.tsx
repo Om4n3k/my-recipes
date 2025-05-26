@@ -1,16 +1,16 @@
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
-import { CgChevronLeft, CgHeart, CgTime } from 'react-icons/cg'
-import { HiMiniFire } from 'react-icons/hi2'
+import { CgChevronLeft, CgHeart } from 'react-icons/cg'
 import IngredientsList from './IngredientsList'
 import Instructions from './Instructions'
+import RecipeHeader from './RecipeHeader'
 
 function Page() {
     return (
         <div className='p-8 space-y-5'>
             <div className='-m-8 relative h-[300px]'>
                 <div className='bg-transparent p-8 flex justify-between items-center'>
-                    <Button>
+                    <Button url={'..'}>
                         <CgChevronLeft />
                     </Button>
                     <Button className='backdrop-blur-md bg-black/50 text-white aspect-square w-16 rounded-2xl shadow border border-white/50 grid place-items-center text-2xl'>
@@ -26,14 +26,11 @@ function Page() {
                 />
             </div>
 
-            <div className='w-full p-4 bg-white shadow-xl rounded-2xl -translate-y-1/4 text-center -mb-2'>
-                <h1 className='font-bold text-3xl'>Greek Salad</h1>
-                <h3 className='font-thin text-neutral-700'>6 ingredients</h3>
-                <div className='flex justify-between items-center text-neutral-700 font-thin mt-4'>
-                    <span className='inline-flex items-center gap-1.5'><CgTime className='text-xl'/> 30min</span>
-                    <span className='inline-flex items-center gap-1'><HiMiniFire className='text-xl text-rose-600'/><HiMiniFire className='text-xl'/><HiMiniFire className='text-xl'/></span>
-                </div>
-            </div>
+            <RecipeHeader
+                difficulty={1}
+                name='Greek Salad'
+                timeEstimate={30}
+            />
 
             <IngredientsList ingredients={
                 [
@@ -55,6 +52,7 @@ function Page() {
                     }
                 ]
             }/>
+            <hr/>
             <Instructions instructions={
                 [
                     "Bring well-salted water to a boil in a large pot. Add the pasta and cook until al dente, about 8 minutes. Drain and rinse under cold water.",

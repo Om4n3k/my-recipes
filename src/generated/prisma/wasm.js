@@ -119,7 +119,9 @@ exports.Prisma.RecipeScalarFieldEnum = {
   description: 'description',
   steps: 'steps',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  difficulty: 'difficulty',
+  time: 'time'
 };
 
 exports.Prisma.SortOrder = {

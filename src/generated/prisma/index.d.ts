@@ -973,8 +973,20 @@ export namespace Prisma {
 
   export type AggregateRecipe = {
     _count: RecipeCountAggregateOutputType | null
+    _avg: RecipeAvgAggregateOutputType | null
+    _sum: RecipeSumAggregateOutputType | null
     _min: RecipeMinAggregateOutputType | null
     _max: RecipeMaxAggregateOutputType | null
+  }
+
+  export type RecipeAvgAggregateOutputType = {
+    difficulty: number | null
+    time: number | null
+  }
+
+  export type RecipeSumAggregateOutputType = {
+    difficulty: number | null
+    time: number | null
   }
 
   export type RecipeMinAggregateOutputType = {
@@ -983,6 +995,8 @@ export namespace Prisma {
     description: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    difficulty: number | null
+    time: number | null
   }
 
   export type RecipeMaxAggregateOutputType = {
@@ -991,6 +1005,8 @@ export namespace Prisma {
     description: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    difficulty: number | null
+    time: number | null
   }
 
   export type RecipeCountAggregateOutputType = {
@@ -1000,9 +1016,21 @@ export namespace Prisma {
     steps: number
     createdAt: number
     updatedAt: number
+    difficulty: number
+    time: number
     _all: number
   }
 
+
+  export type RecipeAvgAggregateInputType = {
+    difficulty?: true
+    time?: true
+  }
+
+  export type RecipeSumAggregateInputType = {
+    difficulty?: true
+    time?: true
+  }
 
   export type RecipeMinAggregateInputType = {
     id?: true
@@ -1010,6 +1038,8 @@ export namespace Prisma {
     description?: true
     createdAt?: true
     updatedAt?: true
+    difficulty?: true
+    time?: true
   }
 
   export type RecipeMaxAggregateInputType = {
@@ -1018,6 +1048,8 @@ export namespace Prisma {
     description?: true
     createdAt?: true
     updatedAt?: true
+    difficulty?: true
+    time?: true
   }
 
   export type RecipeCountAggregateInputType = {
@@ -1027,6 +1059,8 @@ export namespace Prisma {
     steps?: true
     createdAt?: true
     updatedAt?: true
+    difficulty?: true
+    time?: true
     _all?: true
   }
 
@@ -1068,6 +1102,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: RecipeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RecipeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: RecipeMinAggregateInputType
@@ -1098,6 +1144,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: RecipeCountAggregateInputType | true
+    _avg?: RecipeAvgAggregateInputType
+    _sum?: RecipeSumAggregateInputType
     _min?: RecipeMinAggregateInputType
     _max?: RecipeMaxAggregateInputType
   }
@@ -1109,7 +1157,11 @@ export namespace Prisma {
     steps: string[]
     createdAt: Date
     updatedAt: Date
+    difficulty: number
+    time: number
     _count: RecipeCountAggregateOutputType | null
+    _avg: RecipeAvgAggregateOutputType | null
+    _sum: RecipeSumAggregateOutputType | null
     _min: RecipeMinAggregateOutputType | null
     _max: RecipeMaxAggregateOutputType | null
   }
@@ -1136,6 +1188,8 @@ export namespace Prisma {
     steps?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    difficulty?: boolean
+    time?: boolean
   }, ExtArgs["result"]["recipe"]>
 
 
@@ -1147,9 +1201,11 @@ export namespace Prisma {
     steps?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    difficulty?: boolean
+    time?: boolean
   }
 
-  export type RecipeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "ingredients" | "steps" | "createdAt" | "updatedAt", ExtArgs["result"]["recipe"]>
+  export type RecipeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "ingredients" | "steps" | "createdAt" | "updatedAt" | "difficulty" | "time", ExtArgs["result"]["recipe"]>
   export type RecipeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $RecipePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1162,6 +1218,8 @@ export namespace Prisma {
       steps: string[]
       createdAt: Date
       updatedAt: Date
+      difficulty: number
+      time: number
     }, ExtArgs["result"]["recipe"]>
     composites: {
       ingredients: Prisma.$IngredientPayload[]
@@ -1562,6 +1620,8 @@ export namespace Prisma {
     readonly steps: FieldRef<"Recipe", 'String[]'>
     readonly createdAt: FieldRef<"Recipe", 'DateTime'>
     readonly updatedAt: FieldRef<"Recipe", 'DateTime'>
+    readonly difficulty: FieldRef<"Recipe", 'Int'>
+    readonly time: FieldRef<"Recipe", 'Int'>
   }
     
 
@@ -1960,7 +2020,9 @@ export namespace Prisma {
     description: 'description',
     steps: 'steps',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    difficulty: 'difficulty',
+    time: 'time'
   };
 
   export type RecipeScalarFieldEnum = (typeof RecipeScalarFieldEnum)[keyof typeof RecipeScalarFieldEnum]
@@ -2027,6 +2089,20 @@ export namespace Prisma {
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
   /**
    * Deep Input Types
    */
@@ -2043,6 +2119,8 @@ export namespace Prisma {
     steps?: StringNullableListFilter<"Recipe">
     createdAt?: DateTimeFilter<"Recipe"> | Date | string
     updatedAt?: DateTimeFilter<"Recipe"> | Date | string
+    difficulty?: IntFilter<"Recipe"> | number
+    time?: IntFilter<"Recipe"> | number
   }
 
   export type RecipeOrderByWithRelationInput = {
@@ -2053,6 +2131,8 @@ export namespace Prisma {
     steps?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    difficulty?: SortOrder
+    time?: SortOrder
   }
 
   export type RecipeWhereUniqueInput = Prisma.AtLeast<{
@@ -2066,6 +2146,8 @@ export namespace Prisma {
     steps?: StringNullableListFilter<"Recipe">
     createdAt?: DateTimeFilter<"Recipe"> | Date | string
     updatedAt?: DateTimeFilter<"Recipe"> | Date | string
+    difficulty?: IntFilter<"Recipe"> | number
+    time?: IntFilter<"Recipe"> | number
   }, "id">
 
   export type RecipeOrderByWithAggregationInput = {
@@ -2075,9 +2157,13 @@ export namespace Prisma {
     steps?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    difficulty?: SortOrder
+    time?: SortOrder
     _count?: RecipeCountOrderByAggregateInput
+    _avg?: RecipeAvgOrderByAggregateInput
     _max?: RecipeMaxOrderByAggregateInput
     _min?: RecipeMinOrderByAggregateInput
+    _sum?: RecipeSumOrderByAggregateInput
   }
 
   export type RecipeScalarWhereWithAggregatesInput = {
@@ -2090,6 +2176,8 @@ export namespace Prisma {
     steps?: StringNullableListFilter<"Recipe">
     createdAt?: DateTimeWithAggregatesFilter<"Recipe"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Recipe"> | Date | string
+    difficulty?: IntWithAggregatesFilter<"Recipe"> | number
+    time?: IntWithAggregatesFilter<"Recipe"> | number
   }
 
   export type RecipeCreateInput = {
@@ -2100,6 +2188,8 @@ export namespace Prisma {
     steps?: RecipeCreatestepsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    difficulty: number
+    time: number
   }
 
   export type RecipeUncheckedCreateInput = {
@@ -2110,6 +2200,8 @@ export namespace Prisma {
     steps?: RecipeCreatestepsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    difficulty: number
+    time: number
   }
 
   export type RecipeUpdateInput = {
@@ -2119,6 +2211,8 @@ export namespace Prisma {
     steps?: RecipeUpdatestepsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    difficulty?: IntFieldUpdateOperationsInput | number
+    time?: IntFieldUpdateOperationsInput | number
   }
 
   export type RecipeUncheckedUpdateInput = {
@@ -2128,6 +2222,8 @@ export namespace Prisma {
     steps?: RecipeUpdatestepsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    difficulty?: IntFieldUpdateOperationsInput | number
+    time?: IntFieldUpdateOperationsInput | number
   }
 
   export type RecipeCreateManyInput = {
@@ -2138,6 +2234,8 @@ export namespace Prisma {
     steps?: RecipeCreatestepsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    difficulty: number
+    time: number
   }
 
   export type RecipeUpdateManyMutationInput = {
@@ -2147,6 +2245,8 @@ export namespace Prisma {
     steps?: RecipeUpdatestepsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    difficulty?: IntFieldUpdateOperationsInput | number
+    time?: IntFieldUpdateOperationsInput | number
   }
 
   export type RecipeUncheckedUpdateManyInput = {
@@ -2156,6 +2256,8 @@ export namespace Prisma {
     steps?: RecipeUpdatestepsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    difficulty?: IntFieldUpdateOperationsInput | number
+    time?: IntFieldUpdateOperationsInput | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2206,6 +2308,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type IngredientOrderByCompositeAggregateInput = {
     _count?: SortOrder
   }
@@ -2217,6 +2330,13 @@ export namespace Prisma {
     steps?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    difficulty?: SortOrder
+    time?: SortOrder
+  }
+
+  export type RecipeAvgOrderByAggregateInput = {
+    difficulty?: SortOrder
+    time?: SortOrder
   }
 
   export type RecipeMaxOrderByAggregateInput = {
@@ -2225,6 +2345,8 @@ export namespace Prisma {
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    difficulty?: SortOrder
+    time?: SortOrder
   }
 
   export type RecipeMinOrderByAggregateInput = {
@@ -2233,6 +2355,13 @@ export namespace Prisma {
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    difficulty?: SortOrder
+    time?: SortOrder
+  }
+
+  export type RecipeSumOrderByAggregateInput = {
+    difficulty?: SortOrder
+    time?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2267,6 +2396,22 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type IngredientListCreateEnvelopeInput = {
     set?: IngredientCreateInput | IngredientCreateInput[]
   }
@@ -2298,6 +2443,14 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -2339,6 +2492,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -2356,17 +2520,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -2379,6 +2532,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type IngredientTypeCreateInput = {
@@ -2426,17 +2606,6 @@ export namespace Prisma {
     deleteMany?: IngredientTypeDeleteManyInput
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -2481,14 +2650,6 @@ export namespace Prisma {
     count?: IntFieldUpdateOperationsInput | number
     unit?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
