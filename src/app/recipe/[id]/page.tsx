@@ -7,18 +7,18 @@ import RecipeHeader from './RecipeHeader'
 
 function Page() {
     return (
-        <div className='p-8 space-y-5'>
-            <div className='-m-8 relative h-[300px]'>
-                <div className='bg-transparent p-8 flex justify-between items-center'>
+        <div className='space-y-5 p-8'>
+            <div className='relative -m-8 h-[300px]'>
+                <div className='flex justify-between items-center bg-transparent p-8'>
                     <Button url={'..'}>
                         <CgChevronLeft />
                     </Button>
-                    <Button className='backdrop-blur-md bg-black/50 text-white aspect-square w-16 rounded-2xl shadow border border-white/50 grid place-items-center text-2xl'>
+                    <Button className='place-items-center grid bg-black/50 shadow backdrop-blur-md border border-white/50 rounded-2xl w-16 aspect-square text-white text-2xl'>
                         <CgHeart />
                     </Button>
                 </div>
                 <Image
-                    className='absolute top-0 left-0 -z-10 h-[300px] w-full object-cover rounded-b-[60px]'
+                    className='top-0 left-0 -z-10 absolute rounded-b-[60px] w-full h-[300px] object-cover'
                     src="https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt='Greek Salad'
                     width={430}
