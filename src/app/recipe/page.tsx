@@ -1,22 +1,23 @@
 import { Button } from '@/components/ui/button'
+import { getRecipes } from '@/lib/db'
 import Image from 'next/image'
 import { CgChevronLeft, CgHeart, CgTime } from 'react-icons/cg'
 import { HiMiniFire } from 'react-icons/hi2'
 
-function Page() {
+async function Page() {
     return (
-        <div className='p-8 space-y-5'>
-            <div className='-m-8 relative h-[300px]'>
-                <div className='bg-transparent p-8 flex justify-between items-center'>
+        <div className='space-y-5 p-8'>
+            <div className='relative -m-8 h-[300px]'>
+                <div className='flex justify-between items-center bg-transparent p-8'>
                     <Button>
                         <CgChevronLeft />
                     </Button>
-                    <Button className='backdrop-blur-md bg-black/50 text-white aspect-square w-16 rounded-2xl shadow border border-white/50 grid place-items-center text-2xl'>
+                    <Button className='place-items-center grid bg-black/50 shadow backdrop-blur-md border border-white/50 rounded-2xl w-16 aspect-square text-white text-2xl'>
                         <CgHeart />
                     </Button>
                 </div>
                 <Image
-                    className='absolute top-0 left-0 -z-10 h-[300px] w-full object-cover rounded-b-[60px]'
+                    className='top-0 left-0 -z-10 absolute rounded-b-[60px] w-full h-[300px] object-cover'
                     src="https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt='Greek Salad'
                     width={430}
@@ -24,12 +25,12 @@ function Page() {
                 />
             </div>
 
-            <div className='w-full p-4 bg-white shadow-xl rounded-2xl -translate-y-1/4 text-center -mb-2'>
+            <div className='bg-white shadow-xl -mb-2 p-4 rounded-2xl w-full text-center -translate-y-1/4'>
                 <h1 className='font-bold text-3xl'>Greek Salad</h1>
                 <h3 className='font-thin text-neutral-700'>6 ingredients</h3>
-                <div className='flex justify-between items-center text-neutral-700 font-thin mt-4'>
+                <div className='flex justify-between items-center mt-4 font-thin text-neutral-700'>
                     <span className='inline-flex items-center gap-1.5'><CgTime className='text-xl'/> 30min</span>
-                    <span className='inline-flex items-center gap-1'><HiMiniFire className='text-xl text-rose-600'/><HiMiniFire className='text-xl'/><HiMiniFire className='text-xl'/></span>
+                    <span className='inline-flex items-center gap-1'><HiMiniFire className='text-rose-600 text-xl'/><HiMiniFire className='text-xl'/><HiMiniFire className='text-xl'/></span>
                 </div>
             </div>
 
@@ -58,13 +59,13 @@ function Page() {
             </div>
             <div className="space-y-5">
                 <h2 className='font-bold text-xl'>Cooking instruction</h2>
-                <div className='bg-rose-300/20 rounded-2xl p-4'>
+                <div className='bg-rose-300/20 p-4 rounded-2xl'>
                     <h3 className='font-bold text-rose-500'>Step 1</h3>
                     <p>
                         Bring well-salted water to a boil in a large pot. Add the pasta and cook until al dente, about 8 minutes. Drain and rinse under cold water.
                     </p>
                 </div>
-                <div className='bg-rose-300/20 rounded-2xl p-4'>
+                <div className='bg-rose-300/20 p-4 rounded-2xl'>
                     <h3 className='font-bold text-rose-500'>Step 2</h3>
                     <p>
                         In a large bowl, combine the pasta, tomatoes, cucumber, olives, and feta. Drizzle with olive oil and season with salt and pepper. Toss to combine.

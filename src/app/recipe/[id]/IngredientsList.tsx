@@ -1,6 +1,6 @@
 import { Ingredient } from '@/generated/prisma'
+import { ShoppingCart } from 'lucide-react';
 import React, { FC } from 'react'
-import { BiCart, BiFork } from 'react-icons/bi';
 
 interface Props {
     ingredients: Ingredient[];
@@ -9,7 +9,7 @@ interface Props {
 const IngredientsList: FC<Props> = ({ ingredients }) => {
     return (
         <div className='space-y-5'>
-            <h2 className='font-bold text-xl flex gap-2 items-center'><BiCart className='text-rose-600'/> Ingredients</h2>
+            <h2 className='flex items-center gap-2 font-bold text-xl'><ShoppingCart className='text-rose-600'/> Ingredients</h2>
             {ingredients.length > 0 && ingredients.map(el => (
                 <div key={el.category} className='space-y-3'>
                     <div>

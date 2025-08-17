@@ -7,9 +7,17 @@ import Difficulty from '../[id]/Difficulty'
 import { Button } from '@/components/ui/button'
 import StepsInput from './StepsInput'
 import z from 'zod/v4'
+import { Prisma, PrismaClient } from '@/generated/prisma'
+import {v2 as cloudinary} from 'cloudinary'
+import { uploadFile } from '@/lib/cloudinary'
 
 const scheme = z.object({
-    
+    title: z.string().min(1, 'Title is required'),
+    description: z.string().min(1, 'Description is required'),
+    time: z.coerce.number().min(1, 'Time must be a positive number'),
+    difficulty: z.coerce.number().int().min(1, 'Difficulty must be between 1 and 3').max(3),
+    image: z.instanceof(File).optional(),
+    steps: z.array(z.string()).nonempty('At least one step is required')
 })
 
 const Page = () => {
@@ -18,6 +26,41 @@ const Page = () => {
         // Here you would handle the form submission, e.g., save the recipe to a database
         console.log('Form data:', Object.fromEntries(formData.entries()))
         console.log('Steps', formData.getAll('steps[]') as string[])
+
+        try {
+            const parsedData = scheme.parse({
+                title: formData.get('title'),
+                description: formData.get('description'),
+                time: formData.get('time'),
+                difficulty: formData.get('difficulty'),
+                image: formData.get('image'),
+                steps: formData.getAll('steps[]')
+            });
+
+            let fileId: string | null = null;
+            if (parsedData.image) {
+                const res = await uploadFile(parsedData.image as File);
+                res?.public_id && (fileId = res.public_id);
+                console.log('Uploaded image to Cloudinary:', res);
+            }
+
+            const prisma = new PrismaClient();
+            const recipe = await prisma.recipe.create({
+                data: {
+                    title: parsedData.title,
+                    description: parsedData.description,
+                    time: parsedData.time,
+                    difficulty: parsedData.difficulty,
+                    image: fileId,
+                    steps: parsedData.steps
+                }
+            })
+
+            console.log('Recipe created:', recipe);
+        } catch (error) {
+            console.error('Validation error:', error);
+            // Handle validation errors, e.g., return an error message to the user
+        }
     }
 
     return (

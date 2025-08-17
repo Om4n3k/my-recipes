@@ -1,11 +1,24 @@
 import { Button } from '@/components/ui/button'
-import Image from 'next/image'
+import { NextPage } from 'next'
+import React from 'react'
 import { CgChevronLeft, CgHeart } from 'react-icons/cg'
 import IngredientsList from './IngredientsList'
 import Instructions from './Instructions'
 import RecipeHeader from './RecipeHeader'
+import { CloudImage } from '@/components/CloudImage'
+import { getRecipe } from '@/lib/db'
+import { notFound } from 'next/navigation'
 
-function Page() {
+const RecipePage: NextPage<{
+    params: Promise<{ id: string }>
+}> = async ({ params }) => {
+    const { id } = await params;
+    const recipe = await getRecipe(id);
+
+    if (!recipe) {
+        return notFound();
+    }
+
     return (
         <div className='space-y-5 p-4'>
             <div className='relative -m-8 h-[300px]'>
@@ -17,9 +30,9 @@ function Page() {
                         <CgHeart />
                     </Button>
                 </div>
-                <Image
+                <CloudImage
                     className='top-0 left-0 -z-10 absolute rounded-b-[60px] w-full h-[300px] object-cover'
-                    src="https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    src={recipe.image!}
                     alt='Greek Salad'
                     width={430}
                     height={645}
@@ -27,12 +40,12 @@ function Page() {
             </div>
 
             <RecipeHeader
-                difficulty={1}
-                name='Greek Salad'
-                timeEstimate={30}
+                difficulty={recipe.difficulty}
+                name={recipe.title}
+                timeEstimate={recipe.time}
             />
 
-            <IngredientsList ingredients={
+            {/* <IngredientsList ingredients={
                 [
                     {
                         category: 'For Salat',
@@ -51,16 +64,12 @@ function Page() {
                         ]
                     }
                 ]
-            }/>
-            <hr/>
-            <Instructions instructions={
-                [
-                    "Bring well-salted water to a boil in a large pot. Add the pasta and cook until al dente, about 8 minutes. Drain and rinse under cold water.",
-                    "In a large bowl, combine the pasta, tomatoes, cucumber, olives, and feta. Drizzle with olive oil and season with salt and pepper. Toss to combine."
-                ]
-            }/>
+            } /> */}
+            <IngredientsList ingredients={recipe.ingredients} />
+            <hr />
+            <Instructions instructions={recipe.steps} />
         </div>
     )
 }
 
-export default Page;
+export default RecipePage

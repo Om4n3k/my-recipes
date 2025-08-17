@@ -3,6 +3,8 @@ import { Lato } from "next/font/google"
 import { CgAdd, CgHome } from 'react-icons/cg'
 import './globals.css'
 import TabLink from '../components/TabLink'
+import { cn } from "@/lib/utils"
+import { v2 as cloudinary } from 'cloudinary'
 
 export const metadata: Metadata = {
   title: 'Hello World'
@@ -13,21 +15,25 @@ const lato = Lato({
   weight: ['400', '700'],
 })
 
+cloudinary.config({
+  secure: true,
+})
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={lato.className}>
+    <html lang="en" className={cn(lato.className, 'antialiased')}>
       <head />
       <body className="pb-16">
         <main className="p-4">
           {children}
         </main>
         <nav className='bottom-0 left-0 fixed flex justify-center items-center bg-rose-600 py-1 w-full h-16'>
-          <TabLink href='/' icon={<CgHome/>} label='Home'/>
-          <TabLink href='/recipe/new' icon={<CgAdd/>} label='New Recipe'/>
+          <TabLink href='/' icon={<CgHome />} label='Home' />
+          <TabLink href='/recipe/new' icon={<CgAdd />} label='New Recipe' />
         </nav>
       </body>
     </html>

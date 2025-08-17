@@ -120,6 +120,7 @@ exports.Prisma.RecipeScalarFieldEnum = {
   steps: 'steps',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  image: 'image',
   difficulty: 'difficulty',
   time: 'time'
 };
