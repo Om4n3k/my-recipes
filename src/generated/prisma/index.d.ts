@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model RecipeStep
+ * 
+ */
+export type RecipeStep = $Result.DefaultSelection<Prisma.$RecipeStepPayload>
+/**
  * Model Ingredient
  * 
  */
@@ -834,6 +839,69 @@ export namespace Prisma {
    */
 
   /**
+   * Model RecipeStep
+   */
+
+
+
+
+
+  export type RecipeStepSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    description?: boolean
+    image?: boolean
+  }, ExtArgs["result"]["recipeStep"]>
+
+
+
+  export type RecipeStepSelectScalar = {
+    description?: boolean
+    image?: boolean
+  }
+
+  export type RecipeStepOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"description" | "image", ExtArgs["result"]["recipeStep"]>
+
+  export type $RecipeStepPayload = {
+    name: "RecipeStep"
+    objects: {}
+    scalars: {
+      description: string
+      image: string | null
+    }
+    composites: {}
+  }
+
+  type RecipeStepGetPayload<S extends boolean | null | undefined | RecipeStepDefaultArgs> = $Result.GetResult<Prisma.$RecipeStepPayload, S>
+
+
+
+
+
+  /**
+   * Fields of the RecipeStep model
+   */
+  interface RecipeStepFieldRefs {
+    readonly description: FieldRef<"RecipeStep", 'String'>
+    readonly image: FieldRef<"RecipeStep", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RecipeStep without action
+   */
+  export type RecipeStepDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecipeStep
+     */
+    select?: RecipeStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecipeStep
+     */
+    omit?: RecipeStepOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model Ingredient
    */
 
@@ -991,7 +1059,7 @@ export namespace Prisma {
 
   export type RecipeMinAggregateOutputType = {
     id: string | null
-    title: string | null
+    name: string | null
     description: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1002,7 +1070,7 @@ export namespace Prisma {
 
   export type RecipeMaxAggregateOutputType = {
     id: string | null
-    title: string | null
+    name: string | null
     description: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1013,9 +1081,8 @@ export namespace Prisma {
 
   export type RecipeCountAggregateOutputType = {
     id: number
-    title: number
+    name: number
     description: number
-    steps: number
     createdAt: number
     updatedAt: number
     image: number
@@ -1037,7 +1104,7 @@ export namespace Prisma {
 
   export type RecipeMinAggregateInputType = {
     id?: true
-    title?: true
+    name?: true
     description?: true
     createdAt?: true
     updatedAt?: true
@@ -1048,7 +1115,7 @@ export namespace Prisma {
 
   export type RecipeMaxAggregateInputType = {
     id?: true
-    title?: true
+    name?: true
     description?: true
     createdAt?: true
     updatedAt?: true
@@ -1059,9 +1126,8 @@ export namespace Prisma {
 
   export type RecipeCountAggregateInputType = {
     id?: true
-    title?: true
+    name?: true
     description?: true
-    steps?: true
     createdAt?: true
     updatedAt?: true
     image?: true
@@ -1158,9 +1224,8 @@ export namespace Prisma {
 
   export type RecipeGroupByOutputType = {
     id: string
-    title: string
+    name: string
     description: string
-    steps: string[]
     createdAt: Date
     updatedAt: Date
     image: string | null
@@ -1189,10 +1254,10 @@ export namespace Prisma {
 
   export type RecipeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    title?: boolean
+    name?: boolean
     description?: boolean
     ingredients?: boolean | IngredientDefaultArgs<ExtArgs>
-    steps?: boolean
+    steps?: boolean | RecipeStepDefaultArgs<ExtArgs>
     createdAt?: boolean
     updatedAt?: boolean
     image?: boolean
@@ -1204,9 +1269,8 @@ export namespace Prisma {
 
   export type RecipeSelectScalar = {
     id?: boolean
-    title?: boolean
+    name?: boolean
     description?: boolean
-    steps?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     image?: boolean
@@ -1214,7 +1278,7 @@ export namespace Prisma {
     time?: boolean
   }
 
-  export type RecipeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "ingredients" | "steps" | "createdAt" | "updatedAt" | "image" | "difficulty" | "time", ExtArgs["result"]["recipe"]>
+  export type RecipeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "ingredients" | "steps" | "createdAt" | "updatedAt" | "image" | "difficulty" | "time", ExtArgs["result"]["recipe"]>
   export type RecipeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $RecipePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1222,9 +1286,8 @@ export namespace Prisma {
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      title: string
+      name: string
       description: string
-      steps: string[]
       createdAt: Date
       updatedAt: Date
       image: string | null
@@ -1233,6 +1296,7 @@ export namespace Prisma {
     }, ExtArgs["result"]["recipe"]>
     composites: {
       ingredients: Prisma.$IngredientPayload[]
+      steps: Prisma.$RecipeStepPayload[]
     }
   }
 
@@ -1625,9 +1689,8 @@ export namespace Prisma {
    */
   interface RecipeFieldRefs {
     readonly id: FieldRef<"Recipe", 'String'>
-    readonly title: FieldRef<"Recipe", 'String'>
+    readonly name: FieldRef<"Recipe", 'String'>
     readonly description: FieldRef<"Recipe", 'String'>
-    readonly steps: FieldRef<"Recipe", 'String[]'>
     readonly createdAt: FieldRef<"Recipe", 'DateTime'>
     readonly updatedAt: FieldRef<"Recipe", 'DateTime'>
     readonly image: FieldRef<"Recipe", 'String'>
@@ -2027,9 +2090,8 @@ export namespace Prisma {
 
   export const RecipeScalarFieldEnum: {
     id: 'id',
-    title: 'title',
+    name: 'name',
     description: 'description',
-    steps: 'steps',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     image: 'image',
@@ -2125,10 +2187,10 @@ export namespace Prisma {
     OR?: RecipeWhereInput[]
     NOT?: RecipeWhereInput | RecipeWhereInput[]
     id?: StringFilter<"Recipe"> | string
-    title?: StringFilter<"Recipe"> | string
+    name?: StringFilter<"Recipe"> | string
     description?: StringFilter<"Recipe"> | string
     ingredients?: IngredientCompositeListFilter | IngredientObjectEqualityInput[]
-    steps?: StringNullableListFilter<"Recipe">
+    steps?: RecipeStepCompositeListFilter | RecipeStepObjectEqualityInput[]
     createdAt?: DateTimeFilter<"Recipe"> | Date | string
     updatedAt?: DateTimeFilter<"Recipe"> | Date | string
     image?: StringNullableFilter<"Recipe"> | string | null
@@ -2138,10 +2200,10 @@ export namespace Prisma {
 
   export type RecipeOrderByWithRelationInput = {
     id?: SortOrder
-    title?: SortOrder
+    name?: SortOrder
     description?: SortOrder
     ingredients?: IngredientOrderByCompositeAggregateInput
-    steps?: SortOrder
+    steps?: RecipeStepOrderByCompositeAggregateInput
     createdAt?: SortOrder
     updatedAt?: SortOrder
     image?: SortOrder
@@ -2154,10 +2216,10 @@ export namespace Prisma {
     AND?: RecipeWhereInput | RecipeWhereInput[]
     OR?: RecipeWhereInput[]
     NOT?: RecipeWhereInput | RecipeWhereInput[]
-    title?: StringFilter<"Recipe"> | string
+    name?: StringFilter<"Recipe"> | string
     description?: StringFilter<"Recipe"> | string
     ingredients?: IngredientCompositeListFilter | IngredientObjectEqualityInput[]
-    steps?: StringNullableListFilter<"Recipe">
+    steps?: RecipeStepCompositeListFilter | RecipeStepObjectEqualityInput[]
     createdAt?: DateTimeFilter<"Recipe"> | Date | string
     updatedAt?: DateTimeFilter<"Recipe"> | Date | string
     image?: StringNullableFilter<"Recipe"> | string | null
@@ -2167,9 +2229,8 @@ export namespace Prisma {
 
   export type RecipeOrderByWithAggregationInput = {
     id?: SortOrder
-    title?: SortOrder
+    name?: SortOrder
     description?: SortOrder
-    steps?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     image?: SortOrder
@@ -2187,9 +2248,8 @@ export namespace Prisma {
     OR?: RecipeScalarWhereWithAggregatesInput[]
     NOT?: RecipeScalarWhereWithAggregatesInput | RecipeScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Recipe"> | string
-    title?: StringWithAggregatesFilter<"Recipe"> | string
+    name?: StringWithAggregatesFilter<"Recipe"> | string
     description?: StringWithAggregatesFilter<"Recipe"> | string
-    steps?: StringNullableListFilter<"Recipe">
     createdAt?: DateTimeWithAggregatesFilter<"Recipe"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Recipe"> | Date | string
     image?: StringNullableWithAggregatesFilter<"Recipe"> | string | null
@@ -2199,10 +2259,10 @@ export namespace Prisma {
 
   export type RecipeCreateInput = {
     id?: string
-    title: string
+    name: string
     description: string
     ingredients?: XOR<IngredientListCreateEnvelopeInput, IngredientCreateInput> | IngredientCreateInput[]
-    steps?: RecipeCreatestepsInput | string[]
+    steps?: XOR<RecipeStepListCreateEnvelopeInput, RecipeStepCreateInput> | RecipeStepCreateInput[]
     createdAt?: Date | string
     updatedAt?: Date | string
     image?: string | null
@@ -2212,10 +2272,10 @@ export namespace Prisma {
 
   export type RecipeUncheckedCreateInput = {
     id?: string
-    title: string
+    name: string
     description: string
     ingredients?: XOR<IngredientListCreateEnvelopeInput, IngredientCreateInput> | IngredientCreateInput[]
-    steps?: RecipeCreatestepsInput | string[]
+    steps?: XOR<RecipeStepListCreateEnvelopeInput, RecipeStepCreateInput> | RecipeStepCreateInput[]
     createdAt?: Date | string
     updatedAt?: Date | string
     image?: string | null
@@ -2224,10 +2284,10 @@ export namespace Prisma {
   }
 
   export type RecipeUpdateInput = {
-    title?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     ingredients?: XOR<IngredientListUpdateEnvelopeInput, IngredientCreateInput> | IngredientCreateInput[]
-    steps?: RecipeUpdatestepsInput | string[]
+    steps?: XOR<RecipeStepListUpdateEnvelopeInput, RecipeStepCreateInput> | RecipeStepCreateInput[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -2236,10 +2296,10 @@ export namespace Prisma {
   }
 
   export type RecipeUncheckedUpdateInput = {
-    title?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     ingredients?: XOR<IngredientListUpdateEnvelopeInput, IngredientCreateInput> | IngredientCreateInput[]
-    steps?: RecipeUpdatestepsInput | string[]
+    steps?: XOR<RecipeStepListUpdateEnvelopeInput, RecipeStepCreateInput> | RecipeStepCreateInput[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -2249,10 +2309,10 @@ export namespace Prisma {
 
   export type RecipeCreateManyInput = {
     id?: string
-    title: string
+    name: string
     description: string
     ingredients?: XOR<IngredientListCreateEnvelopeInput, IngredientCreateInput> | IngredientCreateInput[]
-    steps?: RecipeCreatestepsInput | string[]
+    steps?: XOR<RecipeStepListCreateEnvelopeInput, RecipeStepCreateInput> | RecipeStepCreateInput[]
     createdAt?: Date | string
     updatedAt?: Date | string
     image?: string | null
@@ -2261,10 +2321,10 @@ export namespace Prisma {
   }
 
   export type RecipeUpdateManyMutationInput = {
-    title?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     ingredients?: XOR<IngredientListUpdateEnvelopeInput, IngredientCreateInput> | IngredientCreateInput[]
-    steps?: RecipeUpdatestepsInput | string[]
+    steps?: XOR<RecipeStepListUpdateEnvelopeInput, RecipeStepCreateInput> | RecipeStepCreateInput[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -2273,10 +2333,10 @@ export namespace Prisma {
   }
 
   export type RecipeUncheckedUpdateManyInput = {
-    title?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     ingredients?: XOR<IngredientListUpdateEnvelopeInput, IngredientCreateInput> | IngredientCreateInput[]
-    steps?: RecipeUpdatestepsInput | string[]
+    steps?: XOR<RecipeStepListUpdateEnvelopeInput, RecipeStepCreateInput> | RecipeStepCreateInput[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -2313,12 +2373,18 @@ export namespace Prisma {
     category: string
   }
 
-  export type StringNullableListFilter<$PrismaModel = never> = {
-    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    has?: string | StringFieldRefInput<$PrismaModel> | null
-    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
-    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+  export type RecipeStepCompositeListFilter = {
+    equals?: RecipeStepObjectEqualityInput[]
+    every?: RecipeStepWhereInput
+    some?: RecipeStepWhereInput
+    none?: RecipeStepWhereInput
     isEmpty?: boolean
+    isSet?: boolean
+  }
+
+  export type RecipeStepObjectEqualityInput = {
+    description: string
+    image?: string | null
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -2363,11 +2429,14 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type RecipeStepOrderByCompositeAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type RecipeCountOrderByAggregateInput = {
     id?: SortOrder
-    title?: SortOrder
+    name?: SortOrder
     description?: SortOrder
-    steps?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     image?: SortOrder
@@ -2382,7 +2451,7 @@ export namespace Prisma {
 
   export type RecipeMaxOrderByAggregateInput = {
     id?: SortOrder
-    title?: SortOrder
+    name?: SortOrder
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -2393,7 +2462,7 @@ export namespace Prisma {
 
   export type RecipeMinOrderByAggregateInput = {
     id?: SortOrder
-    title?: SortOrder
+    name?: SortOrder
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -2483,8 +2552,13 @@ export namespace Prisma {
     category: string
   }
 
-  export type RecipeCreatestepsInput = {
-    set: string[]
+  export type RecipeStepListCreateEnvelopeInput = {
+    set?: RecipeStepCreateInput | RecipeStepCreateInput[]
+  }
+
+  export type RecipeStepCreateInput = {
+    description: string
+    image?: string | null
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -2498,9 +2572,11 @@ export namespace Prisma {
     deleteMany?: IngredientDeleteManyInput
   }
 
-  export type RecipeUpdatestepsInput = {
-    set?: string[]
-    push?: string | string[]
+  export type RecipeStepListUpdateEnvelopeInput = {
+    set?: RecipeStepCreateInput | RecipeStepCreateInput[]
+    push?: RecipeStepCreateInput | RecipeStepCreateInput[]
+    updateMany?: RecipeStepUpdateManyInput
+    deleteMany?: RecipeStepDeleteManyInput
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -2546,6 +2622,14 @@ export namespace Prisma {
     count: number
     unit?: string | null
     name: string
+  }
+
+  export type RecipeStepWhereInput = {
+    AND?: RecipeStepWhereInput | RecipeStepWhereInput[]
+    OR?: RecipeStepWhereInput[]
+    NOT?: RecipeStepWhereInput | RecipeStepWhereInput[]
+    description?: StringFilter<"RecipeStep"> | string
+    image?: StringNullableFilter<"RecipeStep"> | string | null
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -2688,6 +2772,15 @@ export namespace Prisma {
     where: IngredientWhereInput
   }
 
+  export type RecipeStepUpdateManyInput = {
+    where: RecipeStepWhereInput
+    data: RecipeStepUpdateInput
+  }
+
+  export type RecipeStepDeleteManyInput = {
+    where: RecipeStepWhereInput
+  }
+
   export type IngredientTypeCompositeListFilter = {
     equals?: IngredientTypeObjectEqualityInput[]
     every?: IngredientTypeWhereInput
@@ -2700,6 +2793,11 @@ export namespace Prisma {
   export type IngredientUpdateInput = {
     items?: XOR<IngredientTypeListUpdateEnvelopeInput, IngredientTypeCreateInput> | IngredientTypeCreateInput[]
     category?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type RecipeStepUpdateInput = {
+    description?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type IngredientTypeWhereInput = {

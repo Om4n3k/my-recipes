@@ -115,9 +115,8 @@ Prisma.NullTypes = {
 
 exports.Prisma.RecipeScalarFieldEnum = {
   id: 'id',
-  title: 'title',
+  name: 'name',
   description: 'description',
-  steps: 'steps',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   image: 'image',

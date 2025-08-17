@@ -41,7 +41,7 @@ const RecipePage: NextPage<{
 
             <RecipeHeader
                 difficulty={recipe.difficulty}
-                name={recipe.title}
+                name={recipe.name}
                 timeEstimate={recipe.time}
             />
 

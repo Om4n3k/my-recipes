@@ -5,12 +5,12 @@ import { Input } from '@/components/ui/input'
 import { Control, useFieldArray } from 'react-hook-form'
 import { CgAdd, CgRemove } from 'react-icons/cg'
 
-interface StepsInputProps {
+interface IngredientsInputProps {
     control: Control<any>
     name: string
 }
 
-const StepsInput = ({ control, name }: StepsInputProps) => {
+const IngredientsInput = ({ control, name }: IngredientsInputProps) => {
     const { fields, append, remove } = useFieldArray({
         control,
         name
@@ -18,16 +18,16 @@ const StepsInput = ({ control, name }: StepsInputProps) => {
 
     return (
         <>
-            <FormLabel className="text-md">Describe what needs<span className='text-rose-500'>to be done</span></FormLabel>
+            <FormLabel className="text-md">Add ingredients<span className='text-rose-500'> for your recipe</span></FormLabel>
             {fields.map((field, index) => (
                 <div key={field.id} className="flex items-start gap-2">
                     <FormField
                         control={control}
-                        name={`${name}.${index}.description`}
+                        name={`${name}.${index}.name`}
                         render={({ field }) => (
                             <FormItem>
                                 <FormControl>
-                                    <Input {...field} placeholder={`Step ${index + 1}`} />
+                                    <Input {...field} placeholder="Ingredient name" />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -35,19 +35,23 @@ const StepsInput = ({ control, name }: StepsInputProps) => {
                     />
                     <FormField
                         control={control}
-                        name={`${name}.${index}.image`}
-                        render={({ field: { onChange, value, ...field } }) => (
+                        name={`${name}.${index}.count`}
+                        render={({ field }) => (
                             <FormItem>
                                 <FormControl>
-                                    <Input
-                                        type="file"
-                                        accept="image/jpg,image/png,image/jpeg"
-                                        onChange={(e) => {
-                                            const file = e.target.files?.[0]
-                                            onChange(file)
-                                        }}
-                                        {...field}
-                                    />
+                                    <Input {...field} placeholder="Quantity" />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={control}
+                        name={`${name}.${index}.unit`}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormControl>
+                                    <Input {...field} placeholder="Unit (optional)" />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -67,14 +71,14 @@ const StepsInput = ({ control, name }: StepsInputProps) => {
             ))}
             <Button
                 type="button"
-                onClick={() => append({ description: '', image: undefined })}
+                onClick={() => append({ name: '', count: '', unit: '' })}
                 size="sm"
                 className="w-full"
             >
-                <CgAdd className="mr-2" /> Add step
+                <CgAdd className="mr-2" /> Add ingredient
             </Button>
         </>
     )
 }
 
-export default StepsInput
+export default IngredientsInput
