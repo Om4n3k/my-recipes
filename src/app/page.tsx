@@ -102,7 +102,7 @@ const recipes: Recipe[] = [
 
 export default function Home() {
     return (
-        <main className='space-y-3 p-4'>
+        <>
             <h2 className='font-bold text-2xl'>
                 <span className='text-rose-600'>Explore</span> our ideas
             </h2>
@@ -137,6 +137,6 @@ export default function Home() {
                     </Link>
                 ))}
             </section>
-        </main>
+        </>
     )
 }

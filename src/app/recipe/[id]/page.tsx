@@ -7,7 +7,7 @@ import RecipeHeader from './RecipeHeader'
 
 function Page() {
     return (
-        <div className='space-y-5 p-8'>
+        <div className='space-y-5 p-4'>
             <div className='relative -m-8 h-[300px]'>
                 <div className='flex justify-between items-center bg-transparent p-8'>
                     <Button url={'..'}>

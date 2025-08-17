@@ -1,4 +1,5 @@
 "use client";
+import { cn } from '@/lib/utils';
 import Link, { LinkProps } from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cloneElement, FC, PropsWithChildren, ReactElement } from 'react'
@@ -12,7 +13,7 @@ type Props = LinkProps & {
 const TabLink: FC<Props> = (props) => {
     const pathname = usePathname();
     const isActive = pathname === props.href;
-    const activeClass = isActive ? 'bg-amber-600' : '';
+    const activeClass = 'text-amber-400';
 
     console.log('TabLink', pathname, props.href, isActive);
 
@@ -22,7 +23,12 @@ const TabLink: FC<Props> = (props) => {
     });
 
     return (
-        <Link className={`flex flex-col justify-center items-center h-full rounded-full px-4 text-white ${activeClass}`} {...props}>
+        <Link className={cn(
+            'flex flex-col justify-center items-center px-4 rounded-full h-full text-white',
+            {
+                [activeClass]: isActive,
+            }
+        )} {...props}>
             {iconWithClass}
             <span>{props.label}</span>
         </Link>
