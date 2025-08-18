@@ -10,7 +10,7 @@ export default async function Home() {
 
     return (
         <>
-            <h2 className='font-bold text-2xl'>
+            <h2 className='border-r-4 border-rose-600 font-bold text-2xl'>
                 <span className='text-rose-600'>Explore</span> our ideas
             </h2>
             <section className='gap-4 grid grid-cols-2 mt-3'>

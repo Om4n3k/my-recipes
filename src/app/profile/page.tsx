@@ -12,7 +12,7 @@ const ProfilePage = async () => {
 
     return (
         <div>
-            <h2 className='border-rose-600 border-l-4 font-bold text-2xl text-right'>
+            <h2 className='border-r-4 border-rose-600 font-bold text-2xl'>
                 <span className='text-rose-600'>Welcome</span> {session.user.name}
             </h2>
             <p className='mt-4'>This is your profile page.</p>
