@@ -1,6 +1,6 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
@@ -11,6 +11,7 @@ import z from 'zod';
 import Difficulty from '../[id]/Difficulty';
 import StepsInput from './StepsInput';
 import IngredientsInput from './IngredientsInput';
+import { createRecipeAction } from '@/lib/actions/recipe';
 
 const ingredientScheme = z.object({
     name: z.string().min(1, 'Ingredient name is required'),
@@ -48,9 +49,9 @@ const NewRecipeForm = () => {
             description: '',
             time: 0,
             difficulty: 1,
-            image: undefined,
+            image: new File([], ''),
             ingredients: [{ name: '', count: '', unit: '' }],
-            steps: [{ description: '', image: undefined }]
+            steps: [{ description: '', image: new File([], ''), }]
         }
     })
     const [step, setStep] = useState(1);
@@ -79,6 +80,8 @@ const NewRecipeForm = () => {
                 formData.append(`steps[${idx}][image]`, step.image);
             }
         });
+
+        await createRecipeAction(formData);
     }
 
     return (
@@ -113,7 +116,7 @@ const NewRecipeForm = () => {
                                 </FormItem>
                             )}
                         />
-                        <div className='gap-4 grid grid-cols-2'>
+                        <div className='items-start gap-4 grid grid-cols-3'>
                             <FormField
                                 control={form.control}
                                 name='difficulty'
@@ -146,11 +149,12 @@ const NewRecipeForm = () => {
                                 control={form.control}
                                 name='time'
                                 render={({ field }) => (
-                                    <FormItem>
+                                    <FormItem className='col-span-2'>
                                         <FormLabel>Preperation time</FormLabel>
                                         <FormControl>
                                             <Input {...field} placeholder='Enter approx. recipe preparation time' type='number' />
                                         </FormControl>
+                                        <FormDescription>In minutes</FormDescription>
                                         <FormMessage />
                                     </FormItem>
                                 )}

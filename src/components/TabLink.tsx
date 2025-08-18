@@ -24,7 +24,7 @@ const TabLink: FC<Props> = (props) => {
 
     return (
         <Link className={cn(
-            'flex flex-col justify-center items-center px-4 rounded-full h-full text-white',
+            'flex flex-col flex-1 justify-center items-center px-4 rounded-full h-full text-white',
             {
                 [activeClass]: isActive,
             }

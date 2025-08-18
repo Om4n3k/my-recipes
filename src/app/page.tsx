@@ -20,7 +20,7 @@ export default async function Home() {
                             <CloudImage
                                 className='top-0 left-0 -z-10 absolute object-cover aspect-square'
                                 src={recipe.image}
-                                alt={recipe.title}
+                                alt={recipe.name}
                                 fill
                             />
                         )}
@@ -29,7 +29,7 @@ export default async function Home() {
                         />
                         <div className='flex flex-col shadow-2xl px-4 py-2 w-full text-white'>
                             <h3 className='font-bold text-xl'>
-                                {recipe.title}
+                                {recipe.name}
                             </h3>
                             <div className='flex justify-between items-center w-full'>
                                 <span className='inline-flex items-center gap-1.5 font-thin text-sm'>

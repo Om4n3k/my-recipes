@@ -18,7 +18,7 @@ const IngredientsInput = ({ control, name }: IngredientsInputProps) => {
 
     return (
         <>
-            <FormLabel className="text-md">Add ingredients<span className='text-rose-500'> for your recipe</span></FormLabel>
+            <FormLabel className="text-md">Add ingredients<span className='text-rose-500'>to your recipe</span></FormLabel>
             {fields.map((field, index) => (
                 <div key={field.id} className="flex items-start gap-2">
                     <FormField
@@ -26,6 +26,7 @@ const IngredientsInput = ({ control, name }: IngredientsInputProps) => {
                         name={`${name}.${index}.name`}
                         render={({ field }) => (
                             <FormItem>
+                                <FormLabel>Item name</FormLabel>
                                 <FormControl>
                                     <Input {...field} placeholder="Ingredient name" />
                                 </FormControl>
@@ -38,6 +39,7 @@ const IngredientsInput = ({ control, name }: IngredientsInputProps) => {
                         name={`${name}.${index}.count`}
                         render={({ field }) => (
                             <FormItem>
+                                <FormLabel>Quantity</FormLabel>
                                 <FormControl>
                                     <Input {...field} placeholder="Quantity" />
                                 </FormControl>
@@ -50,6 +52,7 @@ const IngredientsInput = ({ control, name }: IngredientsInputProps) => {
                         name={`${name}.${index}.unit`}
                         render={({ field }) => (
                             <FormItem>
+                                <FormLabel>Unit</FormLabel>
                                 <FormControl>
                                     <Input {...field} placeholder="Unit (optional)" />
                                 </FormControl>

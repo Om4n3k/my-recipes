@@ -8,6 +8,7 @@ import RecipeHeader from './RecipeHeader'
 import { CloudImage } from '@/components/CloudImage'
 import { getRecipe } from '@/lib/db'
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
 
 const RecipePage: NextPage<{
     params: Promise<{ id: string }>
@@ -23,17 +24,19 @@ const RecipePage: NextPage<{
         <div className='space-y-5 p-4'>
             <div className='relative -m-8 h-[300px]'>
                 <div className='flex justify-between items-center bg-transparent p-8'>
-                    <Button url={'..'}>
-                        <CgChevronLeft />
-                    </Button>
-                    <Button className='place-items-center grid bg-black/50 shadow backdrop-blur-md border border-white/50 rounded-2xl w-16 aspect-square text-white text-2xl'>
+                    <Link href={'..'} passHref>
+                        <Button className='place-items-center grid bg-black/50 shadow backdrop-blur-md border border-white/50 rounded-2xl w-16 h-16 text-white text-2xl'>
+                            <CgChevronLeft />
+                        </Button>
+                    </Link>
+                    <Button className='place-items-center grid bg-black/50 shadow backdrop-blur-md border border-white/50 rounded-2xl w-16 h-16 text-white text-2xl'>
                         <CgHeart />
                     </Button>
                 </div>
                 <CloudImage
                     className='top-0 left-0 -z-10 absolute rounded-b-[60px] w-full h-[300px] object-cover'
                     src={recipe.image!}
-                    alt='Greek Salad'
+                    alt={recipe.name}
                     width={430}
                     height={645}
                 />
@@ -43,6 +46,7 @@ const RecipePage: NextPage<{
                 difficulty={recipe.difficulty}
                 name={recipe.name}
                 timeEstimate={recipe.time}
+                creator={recipe.creator}
             />
 
             {/* <IngredientsList ingredients={
