@@ -13,7 +13,7 @@ export default async function Home() {
             <h2 className='border-r-4 border-rose-600 font-bold text-2xl'>
                 <span className='text-rose-600'>Explore</span> our ideas
             </h2>
-            <section className='gap-4 grid grid-cols-2 mt-3'>
+            <section className='gap-4 grid grid-cols-2 lg:grid-cols-6 mt-3'>
                 {recipes.map(recipe => (
                     <Link href={`/recipe/${recipe.id}`} key={recipe.id} className='relative flex justify-center items-end shadow rounded-xl aspect-square overflow-hidden'>
                         {recipe.image && (
@@ -25,7 +25,7 @@ export default async function Home() {
                             />
                         )}
                         <div
-                            className='-z-10 absolute bg-black blur-xl w-full h-1/3 rotate-6'
+                            className='-z-10 absolute bg-black blur-xl lg:-mb-8 w-full h-1/3 rotate-6'
                         />
                         <div className='flex flex-col shadow-2xl px-4 py-2 w-full text-white'>
                             <h3 className='font-bold text-xl'>

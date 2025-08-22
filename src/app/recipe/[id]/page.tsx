@@ -21,8 +21,8 @@ const RecipePage: NextPage<{
     }
 
     return (
-        <div className='space-y-5 p-4'>
-            <div className='relative -m-8 h-[300px]'>
+        <div className='space-y-5 mx-auto p-4 lg:container'>
+            <div className='relative -m-8 lg:m-0 lg:-mt-8 h-[300px] lg:h-[500px]'>
                 <div className='flex justify-between items-center bg-transparent p-8'>
                     <Link href={'..'} passHref>
                         <Button className='place-items-center grid bg-black/50 shadow backdrop-blur-md border border-white/50 rounded-2xl w-16 h-16 text-white text-2xl'>
@@ -34,11 +34,10 @@ const RecipePage: NextPage<{
                     </Button>
                 </div>
                 <CloudImage
-                    className='top-0 left-0 -z-10 absolute rounded-b-[60px] w-full h-[300px] object-cover'
+                    className='top-0 left-0 -z-10 absolute rounded-b-[60px] lg:rounded-b-none w-full h-[300px] lg:h-[500px] object-cover'
                     src={recipe.image!}
                     alt={recipe.name}
-                    width={430}
-                    height={645}
+                    fill
                 />
             </div>
 

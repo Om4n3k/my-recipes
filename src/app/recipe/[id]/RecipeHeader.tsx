@@ -17,7 +17,7 @@ const RecipeHeader: FC<Props> = (props) => {
     const { name, difficulty, timeEstimate } = props;
 
     return (
-        <div className='bg-white shadow-xl -mb-2 p-4 rounded-2xl w-full text-center -translate-y-1/4'>
+        <div className='bg-white shadow-xl -mb-2 p-4 lg:py-16 rounded-2xl lg:rounded-t-none w-full text-center -translate-y-1/4'>
             <div className='flex items-center'>
                 <div className='text-left'>
                     <h1 className='font-bold text-3xl'>{name}</h1>

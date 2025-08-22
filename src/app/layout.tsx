@@ -32,19 +32,21 @@ export default async function RootLayout({
     <html lang="en" className={cn(lato.className, 'antialiased')}>
       <head />
       <body className="pb-16">
+        <nav className='bottom-0 left-0 lg:static fixed place-items-center grid bg-rose-600 w-full h-16'>
+          <div className="flex lg:justify-end items-center lg:mx-auto lg:container">
+            <TabLink href='/' icon={<HomeIcon />} label='Home' />
+            {loggedIn && (
+              <TabLink href='/profile' icon={<UserIcon />} label='Profile' />
+            )}
+            {!loggedIn && (
+              <TabLink href='/auth' icon={<UsersIcon />} label='Login' />
+            )}
+            <TabLink href='/recipe/new' icon={<PlusCircleIcon />} label='Create' />
+          </div>
+        </nav>
         <main className="p-4">
           {children}
         </main>
-        <nav className='bottom-0 left-0 fixed flex items-center bg-rose-600 py-1 w-full h-16'>
-          <TabLink href='/' icon={<HomeIcon />} label='Home' />
-          {loggedIn && (
-            <TabLink href='/profile' icon={<UserIcon />} label='Profile' />
-          )}
-          {!loggedIn && (
-            <TabLink href='/auth' icon={<UsersIcon />} label='Login' />
-          )}
-          <TabLink href='/recipe/new' icon={<PlusCircleIcon />} label='Create' />
-        </nav>
       </body>
     </html>
   )
